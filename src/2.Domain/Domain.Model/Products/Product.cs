@@ -1,4 +1,5 @@
 ﻿using Domain.Model.Orders;
+using Domain.Model.ProductsOrdes;
 using Domain.Model.SeedWork;
 
 namespace Domain.Model.Products
@@ -11,7 +12,7 @@ namespace Domain.Model.Products
 
         public decimal Price { get; set; }
 
-        public virtual Order Order { get; set; }
+        public virtual IEnumerable<ProductOrder> ProductsOrders { get; set; }
 
         public bool Validate()
         {

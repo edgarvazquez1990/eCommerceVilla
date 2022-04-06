@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Domain.Model.Usuarios;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using System.Data;
 using System.Reflection;
@@ -12,14 +13,16 @@ namespace Infra.DataAccess.Context
         public DatabaseContext()
             : base() { }
 
-        public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
-        {
-            ChangeTracker.LazyLoadingEnabled = false;
-            ChangeTracker.AutoDetectChangesEnabled = false;
-        }
+        //public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
+        //{
+        //    ChangeTracker.LazyLoadingEnabled = false;
+        //    ChangeTracker.AutoDetectChangesEnabled = false;
+        //}
 
         public IDbContextTransaction GetCurrentTransaction => _currentTransaction;
         public bool HasActiveTransaction => _currentTransaction != null;
+
+        public DbSet<Usuario> Usuario { get; set; }
 
         public new DbSet<T> Set<T>() where T : class
         {
@@ -83,12 +86,16 @@ namespace Infra.DataAccess.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (!optionsBuilder.IsConfigured)
-            {
-                var conn = "server=osdbqa.cenace.com;database=curso-micro-cvr;port=3306;user=usr-micro-cvr;password=Cenace01#; sslmode = none";
+            var conn = "server=osdbqa.cenace.com;database=curso-micro-cvr;port=3306;user=usr-micro-cvr;password=Cenace01#; sslmode = none";
 
-                optionsBuilder.UseMySql(conn, ServerVersion.AutoDetect(conn));
-            }
+            optionsBuilder.UseMySql(conn, ServerVersion.AutoDetect(conn));
+
+            //if (!optionsBuilder.IsConfigured)
+            //{
+            //    var conn = "server=osdbqa.cenace.com;database=curso-micro-cvr;port=3306;user=usr-micro-cvr;password=Cenace01#; sslmode = none";
+
+            //    optionsBuilder.UseMySql(conn, ServerVersion.AutoDetect(conn));
+            //}
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

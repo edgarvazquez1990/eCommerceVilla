@@ -1,4 +1,6 @@
-﻿using Domain.Model.SeedWork;
+﻿using Domain.Model.Addresses;
+using Domain.Model.Orders;
+using Domain.Model.SeedWork;
 
 namespace Domain.Model.Usuarios
 {
@@ -11,6 +13,10 @@ namespace Domain.Model.Usuarios
         public string PrimerApellido { get; set; }
 
         public string UserName { get; set; }
+
+        public virtual Address Address { get; set; }
+
+        public virtual IEnumerable<Order> Orders { get; set; }
 
         public bool Validate()
         {

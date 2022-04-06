@@ -3,6 +3,7 @@ using System;
 using Infra.DataAccess.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infra.DataAccess.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20220406185818_relationShip3")]
+    partial class relationShip3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,9 +53,6 @@ namespace Infra.DataAccess.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("FechaCompra")
-                        .HasColumnType("datetime(6)");
-
                     b.Property<decimal>("Monto")
                         .HasColumnType("decimal(18,2)");
 
@@ -80,7 +79,7 @@ namespace Infra.DataAccess.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(65,30)");
 
                     b.HasKey("Id");
 
@@ -154,13 +153,13 @@ namespace Infra.DataAccess.Migrations
                     b.HasOne("Domain.Model.Orders.Order", "Order")
                         .WithMany("ProductsOrders")
                         .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.SetNull)
                         .IsRequired();
 
                     b.HasOne("Domain.Model.Products.Product", "Product")
                         .WithMany("ProductsOrders")
                         .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.SetNull)
                         .IsRequired();
 
                     b.Navigation("Order");

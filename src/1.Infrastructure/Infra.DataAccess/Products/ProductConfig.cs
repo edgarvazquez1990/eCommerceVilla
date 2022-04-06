@@ -14,7 +14,7 @@ namespace Infra.DataAccess.Products
             builder.HasIndex(p => p.Id);
 
             builder.Property(cr => cr.Name).IsRequired();
-            builder.Property(cr => cr.Price).IsRequired();
+            builder.Property(cr => cr.Price).HasColumnType("decimal(18,2)").IsRequired();
         }
     }
 }

@@ -27,6 +27,7 @@ namespace App.Service.Usuarios.Commands.RegisterUser
             usuario.UserName = command.Usuario.UserName;
 
             _usuarioRepository.Add(usuario);
+            _usuarioRepository.Save();
 
             return Result.Success();
         }

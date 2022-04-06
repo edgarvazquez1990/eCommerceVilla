@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infra.DataAccess.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20220405180427_relationship")]
-    partial class relationship
+    [Migration("20220406221621_fecha")]
+    partial class fecha
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -34,9 +34,15 @@ namespace Infra.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<int>("UsuarioId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("Id");
+
+                    b.HasIndex("UsuarioId")
+                        .IsUnique();
 
                     b.ToTable("address", (string)null);
                 });
@@ -47,12 +53,20 @@ namespace Infra.DataAccess.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("FechaCompra")
+                        .HasColumnType("datetime(6)");
+
                     b.Property<decimal>("Monto")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<int?>("UsuarioId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("Id");
+
+                    b.HasIndex("UsuarioId");
 
                     b.ToTable("order", (string)null);
                 });
@@ -67,19 +81,29 @@ namespace Infra.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int?>("OrderId")
-                        .HasColumnType("int");
-
                     b.Property<decimal>("Price")
-                        .HasColumnType("decimal(65,30)");
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("Id");
 
+                    b.ToTable("product", (string)null);
+                });
+
+            modelBuilder.Entity("Domain.Model.ProductsOrdes.ProductOrder", b =>
+                {
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ProductId", "OrderId");
+
                     b.HasIndex("OrderId");
 
-                    b.ToTable("product", (string)null);
+                    b.ToTable("product_order", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Model.Usuarios.Usuario", b =>
@@ -106,19 +130,61 @@ namespace Infra.DataAccess.Migrations
                     b.ToTable("usuario", (string)null);
                 });
 
-            modelBuilder.Entity("Domain.Model.Products.Product", b =>
+            modelBuilder.Entity("Domain.Model.Addresses.Address", b =>
                 {
-                    b.HasOne("Domain.Model.Orders.Order", "Order")
-                        .WithMany("Productos")
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.SetNull);
+                    b.HasOne("Domain.Model.Usuarios.Usuario", "Usuario")
+                        .WithOne("Address")
+                        .HasForeignKey("Domain.Model.Addresses.Address", "UsuarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("Order");
+                    b.Navigation("Usuario");
                 });
 
             modelBuilder.Entity("Domain.Model.Orders.Order", b =>
                 {
-                    b.Navigation("Productos");
+                    b.HasOne("Domain.Model.Usuarios.Usuario", "Usuario")
+                        .WithMany("Orders")
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.Navigation("Usuario");
+                });
+
+            modelBuilder.Entity("Domain.Model.ProductsOrdes.ProductOrder", b =>
+                {
+                    b.HasOne("Domain.Model.Orders.Order", "Order")
+                        .WithMany("ProductsOrders")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Model.Products.Product", "Product")
+                        .WithMany("ProductsOrders")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Order");
+
+                    b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("Domain.Model.Orders.Order", b =>
+                {
+                    b.Navigation("ProductsOrders");
+                });
+
+            modelBuilder.Entity("Domain.Model.Products.Product", b =>
+                {
+                    b.Navigation("ProductsOrders");
+                });
+
+            modelBuilder.Entity("Domain.Model.Usuarios.Usuario", b =>
+                {
+                    b.Navigation("Address");
+
+                    b.Navigation("Orders");
                 });
 #pragma warning restore 612, 618
         }

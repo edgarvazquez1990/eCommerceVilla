@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Domain.Model.Usuarios;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 
 namespace Infra.DataAccess.Context
@@ -14,5 +15,7 @@ namespace Infra.DataAccess.Context
         void Rollback();
 
         void Save();
+
+        DbSet<Usuario> Usuario { get; set; }
     }
 }

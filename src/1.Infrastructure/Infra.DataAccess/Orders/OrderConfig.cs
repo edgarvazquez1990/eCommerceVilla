@@ -14,10 +14,11 @@ namespace Infra.DataAccess.Orders
             builder.HasIndex(p => p.Id);
 
             builder.Property(cr => cr.Monto).HasColumnType("decimal(18,2)").IsRequired();
+            builder.Property(cr => cr.FechaCompra);
 
-            builder.HasMany(d => d.Productos)
-                      .WithOne(p => p.Order)
-                      .OnDelete( DeleteBehavior.SetNull);
+            //builder.HasMany(d => d.Productos)
+            //          .WithOne(p => p.Order)
+            //          .OnDelete( DeleteBehavior.SetNull);
         }
     }
 }
