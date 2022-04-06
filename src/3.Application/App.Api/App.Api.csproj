@@ -2,12 +2,18 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\1.Infrastructure\Infra.DataAccess\Infra.DataAccess.csproj" />
+    <ProjectReference Include="..\..\4.UI\Ui.Model\Ui.Model.csproj" />
+    <ProjectReference Include="..\App.Service\App.Service.csproj" />
   </ItemGroup>
 
 </Project>

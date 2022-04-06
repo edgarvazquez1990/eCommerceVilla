@@ -3,7 +3,20 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Usuarios\Queries\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CSharpFunctionalExtensions" Version="2.29.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\2.Domain\Domain.Model\Domain.Model.csproj" />
+    <ProjectReference Include="..\..\4.UI\Ui.Model\Ui.Model.csproj" />
+  </ItemGroup>
 
 </Project>
