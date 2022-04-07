@@ -1,14 +1,7 @@
 ﻿using App.Service.SeedWork;
 using CSharpFunctionalExtensions;
-using Domain.Model.Addresses;
 using Domain.Model.Orders;
 using Domain.Model.ProductsOrdes;
-using Domain.Model.Usuarios;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace App.Service.Orders.Commands.RegisterOrder
 {
@@ -24,7 +17,7 @@ namespace App.Service.Orders.Commands.RegisterOrder
         public Result Handle(RegisterOrderCommand command)
         {
             var transOrder = _orderRepository.BeginTransaction();
-            
+
             try
             {
                 Order order = new();
@@ -32,7 +25,7 @@ namespace App.Service.Orders.Commands.RegisterOrder
                 order.Monto = command.Order.Monto;
                 order.FechaCompra = DateTime.Now;
                 order.UsuarioId = command.Order.UsuarioId;
-                   
+
                 List<ProductOrder> products = new();
 
                 foreach (var item in command.Order.Products)
@@ -50,14 +43,14 @@ namespace App.Service.Orders.Commands.RegisterOrder
 
                 _orderRepository.Add(order);
                 _orderRepository.Save();
-                
+
                 transOrder.Commit();
             }
             catch (Exception)
             {
                 transOrder.Rollback();
             }
-            
+
             return Result.Success();
         }
     }

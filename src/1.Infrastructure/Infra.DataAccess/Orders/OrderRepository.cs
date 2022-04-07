@@ -1,5 +1,4 @@
 ﻿using Domain.Model.Orders;
-using Domain.Model.Products;
 using Infra.DataAccess.Context;
 using Infra.DataAccess.SeedWork;
 

@@ -1,11 +1,6 @@
 ﻿using App.Service.SeedWork;
 using CSharpFunctionalExtensions;
 using Domain.Model.Usuarios;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace App.Service.Usuarios.Commands.RegisterUser
 {

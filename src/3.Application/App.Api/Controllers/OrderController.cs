@@ -1,6 +1,5 @@
 ﻿using App.Service.Orders.Commands.RegisterOrder;
 using App.Service.SeedWork;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Ui.Model.ViewModel;
 

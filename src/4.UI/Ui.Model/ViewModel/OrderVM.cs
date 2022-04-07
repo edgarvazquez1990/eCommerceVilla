@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Ui.Model.ViewModel
+﻿namespace Ui.Model.ViewModel
 {
     public class OrderVM
     {
@@ -12,7 +6,7 @@ namespace Ui.Model.ViewModel
 
         public DateTime FechaCompra { get; set; }
 
-        public decimal Monto { get; set; }        
+        public decimal Monto { get; set; }
 
         public int? UsuarioId { get; set; }
 

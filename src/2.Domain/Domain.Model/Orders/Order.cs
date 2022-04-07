@@ -1,5 +1,4 @@
-﻿using Domain.Model.Products;
-using Domain.Model.ProductsOrdes;
+﻿using Domain.Model.ProductsOrdes;
 using Domain.Model.SeedWork;
 using Domain.Model.Usuarios;
 

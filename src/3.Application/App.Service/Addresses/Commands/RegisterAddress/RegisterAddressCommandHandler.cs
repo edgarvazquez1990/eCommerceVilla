@@ -1,12 +1,6 @@
 ﻿using App.Service.SeedWork;
 using CSharpFunctionalExtensions;
 using Domain.Model.Addresses;
-using Domain.Model.Usuarios;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace App.Service.Addresses.Commands.RegisterAddress
 {

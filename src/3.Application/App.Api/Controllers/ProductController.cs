@@ -17,7 +17,7 @@ namespace App.Api.Controllers
         }
 
         [HttpPost]
-        [Route("registrar")]        
+        [Route("registrar")]
         public IActionResult Registrar(ProductVM model)
         {
             _messages.Dispatch(new RegisterProductCommand(model));

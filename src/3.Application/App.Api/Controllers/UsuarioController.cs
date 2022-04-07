@@ -1,6 +1,5 @@
 ﻿using App.Service.SeedWork;
 using App.Service.Usuarios.Commands.RegisterUser;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Ui.Model.ViewModel;
 
@@ -25,7 +24,7 @@ namespace App.Api.Controllers
             return Ok();
         }
 
-       
+
 
     }
 }
